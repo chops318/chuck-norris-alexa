@@ -5,7 +5,7 @@ const skillName = "Unnofficial Chuck Norris Quotes";
 
 var handlers = {
 
-    "LanguageIntent": function () {
+    "LaunchIntent": function () {
       data.quote()
       .then(quote => {
         this.emit(':tellWithCard', quote, skillName, quote)
@@ -26,14 +26,6 @@ var handlers = {
     "AMAZON.CancelIntent": function () {
         var speechOutput = "Goodbye";
         this.emit(':tell', speechOutput);
-    },
-
-    "LaunchRequest": function () {
-        var speechText = "";
-        speechText += "Welcome to " + skillName + ".  ";
-        speechText += "You can ask for a joke by saying give me a chuck norris joke.  ";
-        var repromptText = "Or you can ask what would chuck norris do";
-        this.emit(':ask', speechText, repromptText);
     },
 
     "Unhandled": function() {
