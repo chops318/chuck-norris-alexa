@@ -1,35 +1,39 @@
 var Alexa = require('alexa-sdk');
 var data = require("./data");
 
-const skillName = "Unnofficial Chuck Norris Quotes";
+var skillName = "Unofficial Chuck Norris Quotes";
 
 var handlers = {
 
-    "LaunchIntent": function () {
+    "LaunchRequest": function () {
       data.quote()
       .then(quote => {
         this.emit(':tellWithCard', quote, skillName, quote)
       })
+      .catch(err => {
+        this.emit(':tellWithCard', err, skillName, err)
+      })
     },
 
-    "AboutIntent": function () {
-        var speechOutput = "Chops made this for fun and a hoodie";
-        this.emit(':tellWithCard', speechOutput, skillName, speechOutput);
+    "AMAZON.HelpIntent": function() {
+      var help = "Here are some ways to activate Unofficial Chuck Norris Quotes : ";
+      help += "Alexa, give me an Unofficial Chuck Norris Quote or ";
+      help += "Alexa, can I hear an unofficial Chuch Norris quote";
+      this.emit(':ask', help, help)
     },
 
-
-    "AMAZON.StopIntent": function () {
-        var speechOutput = "Goodbye";
-        this.emit(':tell', speechOutput);
+    "AMAZON.StopIntent": function() {
+      var stop = "Goodbye";
+      this.emit(':tell', stop);
     },
 
-    "AMAZON.CancelIntent": function () {
-        var speechOutput = "Goodbye";
-        this.emit(':tell', speechOutput);
-    },
+    "AMAZON.CancelIntent": function() {
+      var stop = "Goodbye"
+      this.emit(':tell', stop);
+    }
 
     "Unhandled": function() {
-      this.emit(':ask', 'Help', 'Help')
+      this.emit(':ask', 'Sorry I don\'t know how to fix that', 'Help')
     }
 
 };
