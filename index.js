@@ -30,7 +30,7 @@ var handlers = {
     "AMAZON.CancelIntent": function() {
       var stop = "Goodbye"
       this.emit(':tell', stop);
-    }
+    },
 
     "Unhandled": function() {
       this.emit(':ask', 'Sorry I don\'t know how to fix that', 'Help')
